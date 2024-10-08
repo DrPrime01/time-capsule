@@ -20,7 +20,7 @@ export default function TimeCapsule({
           alt="time capsule"
           className="object-cover aspect-square"
         />
-        {new Date() !== openDate && (
+        {new Date() < new Date(openDate) && (
           <div className="absolute bg-black/85 inset-0 flex items-center justify-center">
             <LockIcon />
           </div>
