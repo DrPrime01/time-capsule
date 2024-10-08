@@ -3,7 +3,7 @@ import { format } from "date-fns";
 
 import InfoIcon from "@/assets/icons/info-icon";
 import LockIcon from "@/assets/icons/lock-icon";
-import { TimeCapsuleStateType } from "@/app/page";
+import { TimeCapsuleStateType } from "@/types";
 
 export default function TimeCapsule({
   url,

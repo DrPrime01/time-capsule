@@ -1,17 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import TimeCapsule from "@/components/TimeCapsule";
 import TimeCapsuleForm from "@/components/TimeCapsuleForm";
-
-export interface TimeCapsuleStateType {
-  url: string;
-  openDate: Date;
-  created_at: Date;
-}
+import { TimeCapsuleStateType } from "@/types";
+import { deserializeTimeCapsule, serializeTimeCapsule } from "@/utils";
 
 export default function Home() {
-  const [timeCapsules, setTimeCapsules] = useState<TimeCapsuleStateType[]>([]);
+  const [timeCapsules, setTimeCapsules] = useState<TimeCapsuleStateType[]>(
+    () => {
+      if (typeof window !== "undefined") {
+        const storedCapsules = localStorage.getItem("timeCapsules");
+        if (storedCapsules) {
+          const parsedCapsules = JSON.parse(storedCapsules);
+          return parsedCapsules.map(deserializeTimeCapsule);
+        }
+      }
+      return [];
+    }
+  );
+
+  useEffect(() => {
+    const serializedCapsules = timeCapsules.map(serializeTimeCapsule);
+    localStorage.setItem("timeCapsules", JSON.stringify(serializedCapsules));
+  }, [timeCapsules]);
 
   return (
     <main className="container mx-auto my-10 flex flex-col gap-y-10">

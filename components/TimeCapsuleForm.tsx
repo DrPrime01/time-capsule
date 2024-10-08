@@ -4,7 +4,7 @@ import { format, parseISO } from "date-fns";
 import axios from "axios";
 
 import FileUpload from "./FileUpload";
-import { TimeCapsuleStateType } from "@/app/page";
+import { TimeCapsuleStateType } from "@/types";
 
 export default function TimeCapsuleForm({
   setTimeCapsules,
